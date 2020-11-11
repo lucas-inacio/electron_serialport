@@ -63,8 +63,7 @@ class Menu extends Component {
                 this.stopAcq();
                 return {running: false};
             } else {
-                this.startAcq(state.port, state.baud);
-                return {running: true};
+                return {running: this.startAcq(state.port, state.baud)};
             }
         });
     }

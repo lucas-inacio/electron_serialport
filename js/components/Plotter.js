@@ -38,7 +38,11 @@ class Plotter extends Component {
     }
 
     startAcq(port, baud) {
-        this.serial.open(port, {baudRate: baud});
+        if (port && baud){
+            this.serial.open(port, {baudRate: baud});
+            return true;
+        }
+        return false;
     }
 
     render() {

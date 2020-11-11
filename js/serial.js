@@ -3,6 +3,7 @@ const DATA_SIZE = 4;
 
 const SerialPort = require('serialport');
 const ByteLength = require('@serialport/parser-byte-length');
+const platform = require('os').platform();
 // const port = new SerialPort('COM3');
 
 // const labels = ['linha1', 'linha2', 'linha3'];
@@ -53,7 +54,9 @@ class Serial {
     }
 
     open(portName, options) {
-        this.port = new SerialPort(portName, options || this.options);
+        this.options = { ...this.options, ...options };
+        let name = (platform === 'win32') ? '\\\\.\\' + portName : portName;
+        this.port = new SerialPort(name, this.options);
         // this.port = new SerialPort(portName);
         this.parser = this.port.pipe(new ByteLength({ length: this.dataCount * this.byteLength }));
         this.parser.on('data', buf => {

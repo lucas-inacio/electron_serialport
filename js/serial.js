@@ -38,6 +38,11 @@ class Serial {
         [ this.byteLength, this.dataReadMethod ] = this.selectReadMethod(dataType || 'float');
     }
 
+    setDataLayout(dataType, dataCount) {
+        this.dataCount = dataCount;
+        [ this.byteLength, this.dataReadMethod ] = this.selectReadMethod(dataType);
+    }
+
     selectReadMethod(dataType) {
         return DATA_TYPE_MAP[dataType];
     }

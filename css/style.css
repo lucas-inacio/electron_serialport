@@ -1,5 +1,6 @@
 html, body {
     height: 100%;
+    width: 100%;
 }
 
 body {
@@ -7,4 +8,13 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
+}
+
+#root {
+    height: 100%;
+    width: 100%;
+}
+
+.relative {
+    display: relative;
 }

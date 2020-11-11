@@ -73,4 +73,9 @@ class Serial {
     onData(func) {
         this.onDataCallback = func;
     }
+
+}
+
+function ListPorts() {
+    return SerialPort.list();
 }

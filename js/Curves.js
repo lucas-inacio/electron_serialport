@@ -162,4 +162,13 @@ class SerialPlotter {
         this.chart.options.scales.yAxes[0].ticks.max = max;
         this.chart.update();
     }
+
+    // Limpa os dados do gráfico
+    clear() {
+        for (let data of this.chart.data.datasets)
+            data.data = [];
+        for (let key in this.data)
+            this.data[key] = [];
+        this.chart.update();
+    }
 }

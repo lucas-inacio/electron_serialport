@@ -2,45 +2,17 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>Hello World!</title>
     <meta http-equiv="Content-Security-Policy" content="script-src 'self' 'unsafe-inline';" />
-    <link rel="stylesheet" href="./css/style.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Hello World!</title>
+    <!-- <link rel="stylesheet" href="./css/style.css"> -->
 </head>
 <body>
-    <!-- <script src="./libs/p5.js"></script>
-    <script src="./libs/dat.gui.js"></script>
-    <script src="./libs/quicksettings.js"></script>
-    <script src="./libs/p5.gui.js"></script>
-    <script src="./libs/grafica.min.js"></script>
-    <!-- <script src="./js/sketch.js"></script> -->
-    <canvas id="chart"></canvas>
-    <script src="node_modules/chart.js/dist/Chart.bundle.min.js"></script>
-    <script src="./js/serial.js"></script>
-    <script src="./js/Curves.js"></script>
-    <script>
-        let ctx = document.getElementById('chart').getContext('2d');
-        let plot = new Plotter(ctx);
-        // plot.addPlot('arduino', [{x: 0.1, y: 0.2}, {x: 0.3, y: 0.1}, {x: 0.23, y: 0.3}, {x: 0.7, y: 0.33}]);
-        plot.addPlot('data1', []);
-        plot.setLineColor('data1', 'rgb(255, 0, 0, 0.3)')
-        plot.setFillColor('data1', 'rgb(0, 0, 0, 0.0)')
-        plot.addPlot('data2', []);
-        plot.setLineColor('data2', 'rgb(0, 255, 0, 0.3)')
-        plot.setFillColor('data2', 'rgb(0, 0, 0, 0.0)')
-        plot.addPlot('data3', []);
-        plot.setLineColor('data3', 'rgb(0, 0, 255, 0.3)')
-        plot.setFillColor('data3', 'rgb(0, 0, 0, 0.0)')
-        plot.setYLim(-0.5, 6);
-
-        const serial = new Serial('float', 3);
-        serial.onData(data => {
-            if (data.length === 3) {
-                plot.pushData('data1', [data[0]]);
-                plot.pushData('data2', [data[1]]);
-                plot.pushData('data3', [data[2]]);
-            }
-        });
-        serial.open('COM3');
-    </script>
+    <div id="root"></div>
+        <script src="node_modules/chart.js/dist/Chart.bundle.min.js"></script>
+        <script src="./js/serial.js"></script>
+        <script src="./js/Curves.js"></script>
+        <script src="./dist/bundle.js"></script>
+    </div>
 </body>
 </html>

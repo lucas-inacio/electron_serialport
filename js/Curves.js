@@ -64,7 +64,7 @@
 //     }
 // }
 
-class Plotter {
+class SerialPlotter {
     constructor(canvasContext, pointCount) {
         this.pointCount = pointCount || 200;
         this.data = {};

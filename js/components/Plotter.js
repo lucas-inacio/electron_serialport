@@ -35,7 +35,10 @@ class Plotter extends Component {
                 this.plot.pushData('data3', [data[2]]);
             }
         });
-        this.serial.open('COM3');
+    }
+
+    startAcq(port, baud) {
+        this.serial.open(port, {baudRate: baud});
     }
 
     render() {
@@ -43,7 +46,7 @@ class Plotter extends Component {
             <Container fluid>
                 <Row>
                     <Col md="3">
-                        <Menu />
+                        <Menu startAcq={(port, baud) => this.startAcq(port, baud)} stopAcq={() => this.serial.close()}/>
                     </Col>
                     <Col md="9">
                         <canvas id="chart"></canvas>

@@ -106,7 +106,7 @@ class Menu extends Component {
                     <Nav vertical navbar>
                         <NavItem>
                             <Dropdown isOpen={this.state.dropDownOpen} toggle={() => this.toggleDrop()}>
-                                <DropdownToggle>{this.state.port || 'Porta'}</DropdownToggle>
+                                <DropdownToggle block="md">{this.state.port || 'Porta'}</DropdownToggle>
                                 <DropdownMenu>
                                     {this.state.portList.map((value) => (
                                         <DropdownItem onClick={(e) => this.onPort(e)} key={value}>{value}</DropdownItem>
@@ -116,7 +116,7 @@ class Menu extends Component {
                         </NavItem>
                         <NavItem>
                             <Dropdown isOpen={this.state.baudOpen} toggle={() => this.toggleBaud()}>
-                                <DropdownToggle>{this.state.baud || 'Baud'}</DropdownToggle>
+                                <DropdownToggle block="md">{this.state.baud || 'Baud'}</DropdownToggle>
                                 <DropdownMenu>
                                     {this.baudRates.map((value) => (
                                         <DropdownItem onClick={(e) => this.onBaud(e)} key={value}>{value}</DropdownItem>
@@ -125,7 +125,7 @@ class Menu extends Component {
                             </Dropdown>
                         </NavItem>
                         <NavItem>
-                            <Button onClick={() => this.onRun()}>{(this.state.running) ? 'Parar' : 'Iniciar'}</Button>
+                            <Button block="md" color="primary" onClick={() => this.onRun()}>{(this.state.running) ? 'Parar' : 'Iniciar'}</Button>
                         </NavItem>
                     </Nav>
                 </Collapse>

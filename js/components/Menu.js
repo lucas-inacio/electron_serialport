@@ -104,7 +104,7 @@ class Menu extends Component {
                 <NavbarToggler onClick={() => this.toggle()}/>
                 <Collapse isOpen={this.state.isOpen} navbar className="w-100">
                     <Nav vertical navbar>
-                        <NavItem>
+                        <NavItem className="my-2">
                             <Dropdown isOpen={this.state.dropDownOpen} toggle={() => this.toggleDrop()}>
                                 <DropdownToggle block="md">{this.state.port || 'Porta'}</DropdownToggle>
                                 <DropdownMenu>
@@ -114,7 +114,7 @@ class Menu extends Component {
                                 </DropdownMenu>
                             </Dropdown>
                         </NavItem>
-                        <NavItem>
+                        <NavItem className="my-2">
                             <Dropdown isOpen={this.state.baudOpen} toggle={() => this.toggleBaud()}>
                                 <DropdownToggle block="md">{this.state.baud || 'Baud'}</DropdownToggle>
                                 <DropdownMenu>
@@ -124,7 +124,7 @@ class Menu extends Component {
                                 </DropdownMenu>
                             </Dropdown>
                         </NavItem>
-                        <NavItem>
+                        <NavItem className="my-2">
                             <Button block="md" color="primary" onClick={() => this.onRun()}>{(this.state.running) ? 'Parar' : 'Iniciar'}</Button>
                         </NavItem>
                     </Nav>

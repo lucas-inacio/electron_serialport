@@ -39,7 +39,9 @@ class Plotter extends Component {
 
     addPlot() {
         let index = this.plot.getSize() + 1;
-        this.plot.addPlot('data' + index, []);
+        let label = 'data' + index;
+        this.plot.addPlot(label, []);
+        this.plot.setFillColor(label, 'rgb(0, 0, 0, 0)');
     }
 
     clearPlot() {

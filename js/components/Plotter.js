@@ -19,15 +19,15 @@ class Plotter extends Component {
         this.plot.addPlot('data1', []);
         this.plot.setLineColor('data1', 'rgb(255, 0, 0, 0.3)')
         this.plot.setFillColor('data1', 'rgb(0, 0, 0, 0.0)')
-        this.plot.addPlot('data2', []);
-        this.plot.setLineColor('data2', 'rgb(0, 255, 0, 0.3)')
-        this.plot.setFillColor('data2', 'rgb(0, 0, 0, 0.0)')
-        this.plot.addPlot('data3', []);
-        this.plot.setLineColor('data3', 'rgb(0, 0, 255, 0.3)')
-        this.plot.setFillColor('data3', 'rgb(0, 0, 0, 0.0)')
+        // this.plot.addPlot('data2', []);
+        // this.plot.setLineColor('data2', 'rgb(0, 255, 0, 0.3)')
+        // this.plot.setFillColor('data2', 'rgb(0, 0, 0, 0.0)')
+        // this.plot.addPlot('data3', []);
+        // this.plot.setLineColor('data3', 'rgb(0, 0, 255, 0.3)')
+        // this.plot.setFillColor('data3', 'rgb(0, 0, 0, 0.0)')
         this.plot.setYLim(-0.5, 6);
         
-        this.serial.setDataLayout('float', 3);
+        this.serial.setDataLayout('float', 1);
         this.serial.onData(data => {
             if (data.length === 3) {
                 this.plot.pushData('data1', [data[0]]);

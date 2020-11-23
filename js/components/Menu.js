@@ -141,7 +141,7 @@ class Menu extends Component {
                         </NavItem>
                         <NavItem className="my-2">
                             <InputGroup>
-                                <Input  type="number" value="1" />
+                                <Input  type="number" min="1" placeholder="quantidade de dados" />
                                 <InputGroupAddon addonType="append">
                                     <Dropdown isOpen={this.state.typeOpen} toggle={() => this.toggleType()}>
                                         <DropdownToggle block="md">{this.state.type || 'Tipo de dados'}</DropdownToggle>

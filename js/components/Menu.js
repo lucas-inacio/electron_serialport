@@ -5,7 +5,10 @@ import {
     Dropdown, 
     DropdownItem, 
     DropdownMenu, 
-    DropdownToggle, 
+    DropdownToggle,
+    Input,
+    InputGroup,
+    InputGroupAddon,
     Nav, 
     Navbar, 
     NavbarBrand, 
@@ -22,6 +25,8 @@ class Menu extends Component {
             isOpen: false,
             dropDownOpen: false,
             baudOpen: false,
+            typeOpen: false,
+            type: null,
             portList: [],
             port: '',
             baud: null,
@@ -68,6 +73,10 @@ class Menu extends Component {
         });
     }
 
+    onType(e) {
+        this.setState({type: e.target.innerText});
+    }
+
     updatePortList() {
         ListPorts().then(portsList => {
             let ports = [];
@@ -92,6 +101,12 @@ class Menu extends Component {
     toggleBaud() {
         this.setState((state) => ({
             baudOpen: !state.baudOpen
+        }));
+    }
+
+    toggleType() {
+        this.setState((state) => ({
+            typeOpen: !state.typeOpen
         }));
     }
 
@@ -123,6 +138,21 @@ class Menu extends Component {
                                     ))}
                                 </DropdownMenu>
                             </Dropdown>
+                        </NavItem>
+                        <NavItem className="my-2">
+                            <InputGroup>
+                                <Input  type="number" value="1" />
+                                <InputGroupAddon addonType="append">
+                                    <Dropdown isOpen={this.state.typeOpen} toggle={() => this.toggleType()}>
+                                        <DropdownToggle block="md">{this.state.type || 'Tipo de dados'}</DropdownToggle>
+                                        <DropdownMenu>
+                                            {Object.keys(DATA_TYPE_MAP).map(value => (
+                                                <DropdownItem onClick={(e) => this.onType(e)} key={value}>{value}</DropdownItem>
+                                                ))}
+                                        </DropdownMenu>
+                                    </Dropdown>
+                                </InputGroupAddon>
+                            </InputGroup>
                         </NavItem>
                         <NavItem className="my-2">
                             <Button block="md" color="primary" onClick={() => this.onRun()}>{(this.state.running) ? 'Parar' : 'Iniciar'}</Button>

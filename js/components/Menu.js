@@ -79,12 +79,9 @@ class Menu extends Component {
                 if (!state.baud) return { message: 'Defina a taxa de dados'};
                 if (!state.baud || !state.quantity) return { message: 'Defina o formato de dados'};
 
-                let running = this.startAcq(state.port, state.baud, state.type);
-                if (running) {
-                    return { running, message: 'Em execução' };
-                } else {
-                    return { message: 'Erro ao iniciar comunicação'};
-                }
+                this.startAcq(state.port, state.baud, state.type)
+                    .then(() => this.setState({running: true, message: 'Em execução'}))
+                    .catch(() => this.setState({message: 'Erro ao iniciar comunicação'}));
             }
         });
     }

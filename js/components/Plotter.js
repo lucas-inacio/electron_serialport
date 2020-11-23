@@ -53,10 +53,9 @@ class Plotter extends Component {
         if (port && baud && type && this.plot.getSize() > 0) {
             this.serial.setDataLayout(type, this.plot.getSize());
             this.plot.clear();
-            this.serial.open(port, {baudRate: baud});
-            return true;
+            
+            return this.serial.open(port, {baudRate: baud});
         }
-        return false;
     }
 
     render() {

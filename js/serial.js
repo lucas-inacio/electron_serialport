@@ -15,7 +15,7 @@ const DATA_TYPE_MAP = {
 class Serial {
     constructor(dataType, dataCount) {
         this.options = {
-            autoOpen: true,
+            autoOpen: false,
             baudRate: 9600,
             dataBits: 8,
             stopBits: 1,
@@ -55,6 +55,17 @@ class Serial {
                 data.push(this.dataReadMethod.call(buf, offset));
             }
             this.onDataCallback(data);
+        });
+
+        return new Promise((resolve, reject) => {
+            try {
+                this.port.open(err => {
+                    if (err) reject(false);
+                    else resolve(true);
+                });
+            } catch (e) {
+                reject(false);
+            }
         });
     }
 

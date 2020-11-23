@@ -39,6 +39,16 @@ class SerialPlotter {
         this.chart.update();
     }
 
+    removeAllPlots() {
+        this.data = {};
+        this.chart.data.datasets = [];
+        this.chart.update();
+    }
+
+    getSize() {
+        return Object.keys(this.data).length;
+    }
+
     pushData(label, data) {
         this.data[label].push(...data);
         let newPoints = [];

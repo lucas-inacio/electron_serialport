@@ -5,7 +5,10 @@ import {
     Dropdown, 
     DropdownItem, 
     DropdownMenu, 
-    DropdownToggle, 
+    DropdownToggle,
+    Input,
+    InputGroup,
+    InputGroupAddon,
     Nav, 
     Navbar, 
     NavbarBrand, 
@@ -18,10 +21,15 @@ class Menu extends Component {
         super(props);
         this.startAcq = props.startAcq;
         this.stopAcq = props.stopAcq;
+        this.addPlot = props.addPlot;
+        this.clearPlot = props.clearPlot;
         this.state = {
             isOpen: false,
             dropDownOpen: false,
             baudOpen: false,
+            typeOpen: false,
+            type: null,
+            quantity: null,
             portList: [],
             port: '',
             baud: null,
@@ -63,9 +71,24 @@ class Menu extends Component {
                 this.stopAcq();
                 return {running: false};
             } else {
-                return {running: this.startAcq(state.port, state.baud)};
+                return {running: this.startAcq(state.port, state.baud, state.type)};
             }
         });
+    }
+
+    onType(e) {
+        this.setState({type: e.target.innerText});
+    }
+
+    onQuantity(e) {
+        let quantity = Number(e.target.value);
+        if (quantity) {
+            this.setState({quantity});
+            this.clearPlot();
+            for (let i = 0; i < quantity; ++i) {
+                this.addPlot();
+            }
+        }
     }
 
     updatePortList() {
@@ -92,6 +115,12 @@ class Menu extends Component {
     toggleBaud() {
         this.setState((state) => ({
             baudOpen: !state.baudOpen
+        }));
+    }
+
+    toggleType() {
+        this.setState((state) => ({
+            typeOpen: !state.typeOpen
         }));
     }
 
@@ -123,6 +152,21 @@ class Menu extends Component {
                                     ))}
                                 </DropdownMenu>
                             </Dropdown>
+                        </NavItem>
+                        <NavItem className="my-2">
+                            <InputGroup>
+                                <Input  type="number" min="1" placeholder="quantidade de dados" onChange={(e) => this.onQuantity(e)}/>
+                                <InputGroupAddon addonType="append">
+                                    <Dropdown isOpen={this.state.typeOpen} toggle={() => this.toggleType()}>
+                                        <DropdownToggle block="md">{this.state.type || 'Tipo de dados'}</DropdownToggle>
+                                        <DropdownMenu>
+                                            {Object.keys(DATA_TYPE_MAP).map(value => (
+                                                <DropdownItem onClick={(e) => this.onType(e)} key={value}>{value}</DropdownItem>
+                                                ))}
+                                        </DropdownMenu>
+                                    </Dropdown>
+                                </InputGroupAddon>
+                            </InputGroup>
                         </NavItem>
                         <NavItem className="my-2">
                             <Button block="md" color="primary" onClick={() => this.onRun()}>{(this.state.running) ? 'Parar' : 'Iniciar'}</Button>

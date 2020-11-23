@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import { 
+import {
+    Alert,
     Button, 
     Collapse, 
     Dropdown, 
@@ -33,7 +34,8 @@ class Menu extends Component {
             portList: [],
             port: '',
             baud: null,
-            running: false
+            running: false,
+            message: null
         };
 
         this.baudRates = [
@@ -71,7 +73,16 @@ class Menu extends Component {
                 this.stopAcq();
                 return {running: false};
             } else {
-                return {running: this.startAcq(state.port, state.baud, state.type)};
+                if (!state.port) return { message: 'Escolha uma porta'};
+                if (!state.baud) return { message: 'Defina a taxa de dados'};
+                if (!state.baud || !state.quantity) return { message: 'Defina o formato de dados'};
+
+                let running = this.startAcq(state.port, state.baud, state.type);
+                if (running) {
+                    return { running, message: null };
+                } else {
+                    return { message: 'Erro ao iniciar comunicação'};
+                }
             }
         });
     }
@@ -171,6 +182,7 @@ class Menu extends Component {
                         <NavItem className="my-2">
                             <Button block="md" color="primary" onClick={() => this.onRun()}>{(this.state.running) ? 'Parar' : 'Iniciar'}</Button>
                         </NavItem>
+                        { (this.state.message) ? <Alert color="danger">{this.state.message}</Alert> : null }
                     </Nav>
                 </Collapse>
             </Navbar>

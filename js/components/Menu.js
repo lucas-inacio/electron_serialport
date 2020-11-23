@@ -59,19 +59,21 @@ class Menu extends Component {
 
     // Seleciona baudRate a partir do menu dropdown
     onBaud(e) {
-        this.setState({baud: parseInt(e.target.innerText, 10)});
+        if (!this.state.running)
+            this.setState({baud: parseInt(e.target.innerText, 10)});
     }
     
     // Seleciona a porta a partir do menu dropdown
     onPort(e) {
-        this.setState({port: e.target.innerText});
+        if (!this.state.running)
+            this.setState({port: e.target.innerText});
     }
 
     onRun() {
         this.setState(state => {
             if (state.running) {
                 this.stopAcq();
-                return {running: false};
+                return {running: false, message: null};
             } else {
                 if (!state.port) return { message: 'Escolha uma porta'};
                 if (!state.baud) return { message: 'Defina a taxa de dados'};
@@ -79,7 +81,7 @@ class Menu extends Component {
 
                 let running = this.startAcq(state.port, state.baud, state.type);
                 if (running) {
-                    return { running, message: null };
+                    return { running, message: 'Em execução' };
                 } else {
                     return { message: 'Erro ao iniciar comunicação'};
                 }
@@ -88,17 +90,23 @@ class Menu extends Component {
     }
 
     onType(e) {
-        this.setState({type: e.target.innerText});
+        if (!this.state.running)
+            this.setState({type: e.target.innerText});
     }
 
     onQuantity(e) {
-        let quantity = Number(e.target.value);
-        if (quantity) {
-            this.setState({quantity});
-            this.clearPlot();
-            for (let i = 0; i < quantity; ++i) {
-                this.addPlot();
+        if (!this.state.running) {
+            let quantity = Number(e.target.value);
+            if (quantity) {
+                this.setState({quantity});
+                this.clearPlot();
+                for (let i = 0; i < quantity; ++i) {
+                    this.addPlot();
+                }
             }
+        } else {
+            e.preventDefault();
+            return false;
         }
     }
 
@@ -182,7 +190,7 @@ class Menu extends Component {
                         <NavItem className="my-2">
                             <Button block="md" color="primary" onClick={() => this.onRun()}>{(this.state.running) ? 'Parar' : 'Iniciar'}</Button>
                         </NavItem>
-                        { (this.state.message) ? <Alert color="danger">{this.state.message}</Alert> : null }
+                        { (this.state.message) ? <Alert color="info">{this.state.message}</Alert> : null }
                     </Nav>
                 </Collapse>
             </Navbar>

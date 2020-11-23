@@ -20,14 +20,7 @@ class Plotter extends Component {
         this.plot.setLineColor('data1', 'rgb(255, 0, 0, 0.3)')
         this.plot.setFillColor('data1', 'rgb(0, 0, 0, 0.0)')
         this.plot.setYLim(-0.1, 5.0);
-        // this.plot.addPlot('data2', []);
-        // this.plot.setLineColor('data2', 'rgb(0, 255, 0, 0.3)')
-        // this.plot.setFillColor('data2', 'rgb(0, 0, 0, 0.0)')
-        // this.plot.addPlot('data3', []);
-        // this.plot.setLineColor('data3', 'rgb(0, 0, 255, 0.3)')
-        // this.plot.setFillColor('data3', 'rgb(0, 0, 0, 0.0)')
-        
-        // this.serial.setDataLayout('float', 1);
+
         this.serial.onData(data => {
             if (data.length === this.plot.getSize()) {
                 for (let i = 0; i < this.plot.getSize(); ++i) {

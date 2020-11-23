@@ -17,8 +17,8 @@ class Plotter extends Component {
         this.plot = new SerialPlotter(ctx);
 
         this.plot.addPlot('data1', []);
-        this.plot.setLineColor('data1', 'rgb(255, 0, 0, 0.3)')
-        this.plot.setFillColor('data1', 'rgb(0, 0, 0, 0.0)')
+        this.plot.setLineColor('data1', 'rgb(255, 0, 0, 0.3)');
+        this.plot.setFillColor('data1', 'rgb(0, 0, 0, 0.0)');
         this.plot.setYLim(-0.1, 5.0);
 
         this.serial.onData(data => {
@@ -34,6 +34,14 @@ class Plotter extends Component {
         let index = this.plot.getSize() + 1;
         let label = 'data' + index;
         this.plot.addPlot(label, []);
+        // Cores pseudo aleatórios
+        let [r, g, b] = (() => {
+            let colors = [];
+            for (let i = 0; i < 3; ++i)
+                colors.push((Math.random() * 255 + 50) % 256);
+            return colors;
+        })();
+        this.plot.setLineColor(label, 'rgb(' + r + ', ' + g + ', ' + b + ', 0.3)');
         this.plot.setFillColor(label, 'rgb(0, 0, 0, 0)');
     }
 

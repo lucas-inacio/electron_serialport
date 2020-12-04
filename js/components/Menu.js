@@ -77,7 +77,7 @@ class Menu extends Component {
             } else {
                 if (!state.port) return { message: 'Escolha uma porta'};
                 if (!state.baud) return { message: 'Defina a taxa de dados'};
-                if (!state.baud || !state.quantity) return { message: 'Defina o formato de dados'};
+                if (!state.type || !state.quantity) return { message: 'Defina o formato de dados'};
 
                 this.startAcq(state.port, state.baud, state.type)
                     .then(() => this.setState({running: true, message: 'Em execução'}))
